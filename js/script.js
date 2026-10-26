@@ -15,8 +15,9 @@ let org=`<div style="font:12px/1.5 Arial,sans-serif;color:#000000">Center for Co
 let flush=new URL('assets/brand/CNTRCOMMNO_color-flush.png?v=20261026-1', document.baseURI).href;
 let centered=new URL('assets/brand/CNTRCOMMNO_color-center.png', document.baseURI).href;
 let logo=`<img src="${flush}" width="430" alt="Center for Community and Nonprofit Studies, School of Human Ecology, University of Wisconsin–Madison" style="display:block;width:430px;max-width:100%;height:auto;border:0">`;
+let logoOption1=logo.replace('width="430"','width="300"').replace('width:430px','width:300px');
 let out;
-if(i===1)out=`<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="font-family:Arial,sans-serif;border-collapse:collapse"><tr><td style="vertical-align:middle;padding-right:6px">${logo}</td><td style="border-left:2px solid #c7c9ca;padding-left:10px;vertical-align:middle">${who}${org}${contact}</td></tr></table>`;
+if(i===1)out=`<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="font-family:Arial,sans-serif;border-collapse:collapse"><tr><td style="vertical-align:middle;padding-right:20px">${logoOption1}</td><td style="border-left:2px solid #c7c9ca;padding-left:18px;vertical-align:middle">${who}${org}${contact}</td></tr></table>`;
 if(i===2)out=`<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="font-family:Arial,sans-serif;border-collapse:collapse"><tr><td style="text-align:left;vertical-align:top"><img src="${centered}" alt="Center for Community and Nonprofit Studies, School of Human Ecology, University of Wisconsin–Madison" width="430" style="display:block;width:430px;max-width:100%;height:auto;border:0;margin-bottom:9px"></td></tr><tr><td style="text-align:left;padding-top:10px">${who}${org}${contact}</td></tr></table>`;
 if(i===3)out=`<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="font-family:Arial,sans-serif;border-collapse:collapse"><tr><td style="vertical-align:middle;padding-right:22px">${who}${org}${contact}</td><td style="vertical-align:middle;border-left:2px solid #c7c9ca;padding-left:18px">${logo}</td></tr></table>`;
 return out}
