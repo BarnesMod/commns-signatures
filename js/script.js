@@ -1,0 +1,21 @@
+const crest=new URL('assets/crest.png', document.baseURI).href,banner=new URL('assets/banner.png', document.baseURI).href;
+const esc=s=>s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
+const get=id=>document.getElementById(id).value.trim();
+function values(){return Object.fromEntries(['name','pronouns','title','email','phone','website'].map(x=>[x,esc(get(x))]));}
+function markup(i){let x=values(),c='#c5050c';let pr=x.pronouns?' | '+x.pronouns:'';
+let parts=[x.email,x.phone,x.website].filter(Boolean).join(' &nbsp;|&nbsp; ');
+let contact=`<div style="font:12px/1.55 Arial,sans-serif;color:#000000;padding-top:6px">${parts}</div>`;
+let who=`<div style="font:bold 17px/1.5 Arial,sans-serif;color:${c}">${x.name}</div><div style="font:13px/1.5 Arial,sans-serif;color:#000000">${x.title}${pr}</div>`;
+let org=`<div style="font:12px/1.5 Arial,sans-serif;color:#000000">Center for Community and Nonprofit Studies</div><div style="font:12px/1.5 Arial,sans-serif;color:#000000">University of Wisconsin–Madison · School of Human Ecology</div>`;
+let img=`<img src="${crest}" width="58" height="85" alt="UW-Madison Logo" style="width:58px;height:85px;vertical-align:middle;border:0">`;
+let logo=`<span style="font:bold 21px Arial,sans-serif;color:${c}">CommNS</span><div style="font:11px/1.4 Arial,sans-serif;color:${c}">Center for Community and<br>Nonprofit Studies</div>`;
+let out;
+if(i===1)out=`<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="font-family:Arial,sans-serif;border-collapse:collapse"><tr><td style="vertical-align:middle;padding-right:14px">${img}</td><td style="vertical-align:middle;padding-right:22px">${logo}</td><td style="border-left:2px solid #c7c9ca;padding-left:20px;vertical-align:middle">${who}${org}${contact}</td></tr></table>`;
+if(i===2)out=`<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="font-family:Arial,sans-serif;border-collapse:collapse"><tr><td><img src="${banner}" alt="Center for Community and Nonprofit Studies · UW–Madison School of Human Ecology" width="640" style="display:block;width:640px;max-width:100%;height:auto;border:0;margin-bottom:9px"></td></tr><tr><td style="padding-top:10px">${who}<div style="font:12px/1.5 Arial,sans-serif;color:#000000">University of Wisconsin–Madison · School of Human Ecology</div>${contact}</td></tr></table>`;
+if(i===3)out=`<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="font-family:Arial,sans-serif;border-collapse:collapse"><tr><td style="vertical-align:middle;padding-right:22px">${who}${org}${contact}</td><td style="vertical-align:middle;border-left:2px solid #c7c9ca;padding-left:18px">${img}</td><td style="vertical-align:middle;padding-left:9px">${logo}</td></tr></table>`;
+return out}
+const titles=['Standard — left logo','Stacked — top banner','Minimal — right logo'];
+document.getElementById('designs').innerHTML=titles.map((title,k)=>`<section class="panel"><h2>${k+1===1?'2. ':''}Option ${k+1}: ${title}</h2><div class="preview" id="preview${k+1}"></div><div class="actions"><button onclick="copySig(${k+1})">Copy formatted signature</button><button class="secondary" onclick="downloadSig(${k+1})">Save HTML file</button></div><p class="note" id="msg${k+1}"></p></section>`).join('');
+function redraw(){for(let i=1;i<=3;i++)document.getElementById('preview'+i).innerHTML=markup(i)}document.querySelectorAll('input').forEach(e=>e.addEventListener('input',redraw));redraw();
+async function copySig(i){let h=markup(i);let msg=document.getElementById('msg'+i);try{await navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([h],{type:'text/html'}),'text/plain':new Blob([document.getElementById('preview'+i).innerText],{type:'text/plain'})})]);msg.textContent='Copied. Paste into Outlook and send yourself a test email.'}catch(e){msg.textContent='Clipboard permissions blocked. Select the signature preview with your mouse, copy it (⌘C / Ctrl+C), and paste into Outlook, or use the editable Word file.'}}
+function downloadSig(i){let body=`<!doctype html><html><head><meta charset="utf-8"></head><body>${markup(i)}</body></html>`;let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([body],{type:'text/html'}));a.download=`CommNS_Signature_Option_${i}.html`;a.click();URL.revokeObjectURL(a.href)}
