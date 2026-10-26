@@ -12,7 +12,7 @@ let parts=[x.email,x.phone,x.website].filter(Boolean).join(' &nbsp;|&nbsp; ');
 let contact=`<div style="font:12px/1.55 Arial,sans-serif;color:#000000;padding-top:6px">${parts}</div>`;
 let who=`<div style="font:bold 17px/1.5 Arial,sans-serif;color:${c}">${x.name}</div><div style="font:13px/1.5 Arial,sans-serif;color:#000000">${x.title}${pr}</div>`;
 let org=`<div style="font:12px/1.5 Arial,sans-serif;color:#000000">Center for Community and Nonprofit Studies</div><div style="font:12px/1.5 Arial,sans-serif;color:#000000">University of Wisconsin–Madison · School of Human Ecology</div>`;
-let flush=new URL('assets/brand/CNTRCOMMNO_color-flush.png', document.baseURI).href;
+let flush=new URL('assets/brand/CNTRCOMMNO_color-flush.png?v=20261026-1', document.baseURI).href;
 let centered=new URL('assets/brand/CNTRCOMMNO_color-center.png', document.baseURI).href;
 let logo=`<img src="${flush}" width="430" alt="Center for Community and Nonprofit Studies, School of Human Ecology, University of Wisconsin–Madison" style="display:block;width:430px;max-width:100%;height:auto;border:0">`;
 let out;
