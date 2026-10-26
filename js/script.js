@@ -14,14 +14,14 @@ let who=`<div style="font:bold 17px/1.5 Arial,sans-serif;color:${c}">${x.name}</
 let org=`<div style="font:12px/1.5 Arial,sans-serif;color:#000000">Center for Community and Nonprofit Studies</div><div style="font:12px/1.5 Arial,sans-serif;color:#000000">University of Wisconsin–Madison · School of Human Ecology</div>`;
 let flush=new URL('assets/brand/CNTRCOMMNO_color-flush.png', document.baseURI).href;
 let centered=new URL('assets/brand/CNTRCOMMNO_color-center.png', document.baseURI).href;
-let logo=`<img src="${flush}" width="260" alt="Center for Community and Nonprofit Studies, School of Human Ecology, University of Wisconsin–Madison" style="display:block;width:260px;max-width:100%;height:auto;border:0">`;
+let logo=`<img src="${flush}" width="350" alt="Center for Community and Nonprofit Studies, School of Human Ecology, University of Wisconsin–Madison" style="display:block;width:350px;max-width:100%;height:auto;border:0">`;
 let out;
 if(i===1)out=`<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="font-family:Arial,sans-serif;border-collapse:collapse"><tr><td style="vertical-align:middle;padding-right:22px">${logo}</td><td style="border-left:2px solid #c7c9ca;padding-left:20px;vertical-align:middle">${who}${org}${contact}</td></tr></table>`;
 if(i===2)out=`<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="font-family:Arial,sans-serif;border-collapse:collapse"><tr><td style="text-align:left;vertical-align:top"><img src="${centered}" alt="Center for Community and Nonprofit Studies, School of Human Ecology, University of Wisconsin–Madison" width="430" style="display:block;width:430px;max-width:100%;height:auto;border:0;margin-bottom:9px"></td></tr><tr><td style="text-align:left;padding-top:10px">${who}${org}${contact}</td></tr></table>`;
 if(i===3)out=`<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="font-family:Arial,sans-serif;border-collapse:collapse"><tr><td style="vertical-align:middle;padding-right:22px">${who}${org}${contact}</td><td style="vertical-align:middle;border-left:2px solid #c7c9ca;padding-left:18px">${logo}</td></tr></table>`;
 return out}
 const titles=['Standard — left logo','Stacked — centered logo','Minimal — right logo'];
-document.getElementById('designs').innerHTML=titles.map((title,k)=>`<section class="panel"><h2>${k+1===1?'2. ':''}Option ${k+1}: ${title}</h2><div class="preview" id="preview${k+1}"></div><div class="actions"><button onclick="copySig(${k+1})">Copy formatted signature</button><button class="secondary" onclick="downloadSig(${k+1})">Save HTML file</button></div><p class="note" id="msg${k+1}"></p></section>`).join('');
+document.getElementById('designs').innerHTML=titles.map((title,k)=>`<section class="panel"><h2>Option ${k+1}: ${title}</h2><div class="preview" id="preview${k+1}"></div><div class="actions"><button onclick="copySig(${k+1})">Copy formatted signature</button><button class="secondary" onclick="downloadSig(${k+1})">Save HTML file</button></div><p class="note" id="msg${k+1}"></p></section>`).join('');
 function redraw(){for(let i=1;i<=3;i++)document.getElementById('preview'+i).innerHTML=markup(i,true)}document.querySelectorAll('input').forEach(e=>e.addEventListener('input',redraw));redraw();
 function plainTextSignature(){
  const x=values();
